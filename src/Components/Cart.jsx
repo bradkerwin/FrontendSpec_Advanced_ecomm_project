@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { addItem, removeItem, checkout } from '../redux/cartSlice'
 
 const Cart = () => {
-    const totalItems = useSelector((state) => state.shoppingCart.totalItems)
-    const products = useSelector((state) => state.shoppingCart.items)
+    const totalItems = useSelector((state) => state.cart.totalItems)
+    const products = useSelector((state) => state.cart.items)
     // const [shippingAddress, setShippingAddress] = useState('')
     const dispatch = useDispatch()
 
@@ -24,6 +24,14 @@ const Cart = () => {
         dispatch(checkout())
     }
 
+    // const getProductName = (id) => {
+    //   const product = products.find((product) => {
+    //     return Number(id) === product.id
+    //   })
+  
+    //   return product ? product.title : 'Unknown Product'
+    // }
+
   return (
     <>
         <Container>
@@ -31,9 +39,9 @@ const Cart = () => {
 
       {Object.entries(products).map(([id, quantity], idx) => (
         <ListGroupItem key={idx}>
-          <span>{getProductName(id)} - Quantity: {quantity}</span>
+          {/* <span>{getProductName(id)} - Quantity: {quantity}</span> */}
           <div>
-            <Button variant="success" onClick={() => handleAddItem(id)}>Add Quantity</Button>
+            <Button className='m-2' variant="success" onClick={() => handleAddItem(id)}>Add Quantity</Button>
             <Button variant="danger" onClick={() => handleRemoveItem(id)}>Remove Product From Cart</Button>
           </div>
         </ListGroupItem>
@@ -41,10 +49,14 @@ const Cart = () => {
 
       <p>Total Items: {totalItems}</p>
 
-      <Button variant='primary' onClick={handleCheckout}>Checkout</Button>
+      <Button className='m-2' variant='success' onClick={handleCheckout}>Checkout</Button>
+
+      <Link to={'/products'}>
+        <Button className='m-2' variant='primary'>Back to Product Catalog</Button>
+      </Link>
 
       <Link to={'/'}>
-        <Button>Back to Homepage</Button>
+        <Button className='m-2' variant='secondary'>Back to Homepage</Button>
       </Link>
 
     </Container>

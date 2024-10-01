@@ -9,13 +9,16 @@ import HomePage from './Components/Homepage';
 import OrdersList from './Components/Orders';
 import NewOrder from './Components/NewOrder';
 import Cart from './Components/Cart';
+import SignIn from './Components/SignIn';
 
 function App() {
+  const user = JSON.parse(sessionStorage.getItem('user'))
 
   return (
     <>
     < NavigationBar/>
     <Routes>
+        <Route path='/signin' element={<SignIn />} />
         <Route path='/' element={<HomePage /> } />
         <Route path='/customers' element={<CustomerList /> } />
         <Route path='/newcustomer' element={<NewCustomer /> } />
