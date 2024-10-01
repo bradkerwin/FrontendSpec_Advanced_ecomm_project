@@ -1,57 +1,48 @@
-import { Component } from 'react';
+import { Component, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { ListGroup, Button, Container, Alert, Card } from 'react-bootstrap';
 import axios from 'axios';
 import { addItem } from '../redux/cartSlice';
 
-// const dispatch = useDispatch()
 
-const handleAddProductToCart = (id) => {
-    dispatch(addItem({id}))
-}
-
-class ProductList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            products: [],
-            error: null
-        };
+const ProductList = () => {
+    const [products, setProducts] = useState([])
+    const [error, setError] = useState('')
+    
+    const dispatch = useDispatch()
+    
+    const handleAddProductToCart = (id) => {
+        dispatch(addItem({id}))
     }
 
-    componentDidMount() {
-        this.fetchProducts();
-    }
-
-    fetchProducts = () => {
+    const fetchProducts = () => {
         axios.get('http://127.0.0.1:5000/products')
              .then(response => {
                 console.log(response.data);
-                 this.setState({ products: response.data });
+                 setProducts(response.data);
              })
              .catch(error => {
                  console.error('Error fetching data:', error);
-                 this.setState({ error: 'Error fetching products. Please try again later.' });
+                 setError(`Error fetching data:, ${error}`)
              });
     }
 
-    deleteProduct = (productId) => {
+    const deleteProduct = (productId) => {
         if (window.confirm("Are you sure?")) { 
             axios.delete(`http://127.0.0.1:5000/products/${productId}`)
                  .then(() => {
-                     this.fetchProducts();
+                     fetchProducts();
                  })
                  .catch(error => {
                      console.error('Error deleting product:', error);
-                     this.setState({ error: 'Error deleting product. Please try again.' });
+                     setError(`Error deleting product:, ${error}`)
                  });
         }
     }
 
-    render() {
-
-        const { error, products } = this.state;
-
+    useEffect( () => {
+        fetchProducts()
+    }, [])
         return (
 
             <Container>
@@ -70,7 +61,7 @@ class ProductList extends Component {
                                         Details: {product.product_details}
                                     </Card.Text>
                                     <Button className='m-2' variant="success" onClick={() => handleAddProductToCart(product.id)}>Add Product to Cart</Button>
-                                    <Button className='m-2' variant="danger" onClick={()=> this.deleteProduct(product.id)}>Remove Product From Catalog</Button>
+                                    <Button className='m-2' variant="danger" onClick={()=> deleteProduct(product.id)}>Remove Product From Catalog</Button>
                                 </Card.Body>
                                 </Card>
                         </ListGroup.Item>
@@ -79,6 +70,5 @@ class ProductList extends Component {
             </Container>
         );
     }
-}
 
 export default ProductList;

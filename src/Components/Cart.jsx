@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { addItem, removeItem, checkout } from '../redux/cartSlice'
 
 const Cart = () => {
-    const shoppingCart = useSelector((state) => state.shoppingCart)
-    const products = useSelector((state) => state.products.items)
+    const totalItems = useSelector((state) => state.shoppingCart.totalItems)
+    const products = useSelector((state) => state.shoppingCart.items)
     // const [shippingAddress, setShippingAddress] = useState('')
     const dispatch = useDispatch()
 
@@ -27,7 +27,7 @@ const Cart = () => {
         <Container>
       <h2>Your Cart:</h2>
 
-      {Object.entries(shoppingCart.items).map(([id, quantity], idx) => (
+      {Object.entries(products).map(([id, quantity], idx) => (
         <ListGroupItem key={idx}>
           <span>{getProductName(id)} - Quantity: {quantity}</span>
           <div>
@@ -37,7 +37,7 @@ const Cart = () => {
         </ListGroupItem>
       ))}
 
-      <p>Total Items: {shoppingCart.totalItems}</p>
+      <p>Total Items: {totalItems}</p>
 
       <Button variant='primary' onClick={handleCheckout}>Checkout</Button>
 
