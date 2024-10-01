@@ -31,8 +31,8 @@ const Cart = () => {
         <ListGroupItem key={idx}>
           <span>{getProductName(id)} - Quantity: {quantity}</span>
           <div>
-            <Button variant="success" onClick={() => handleAddItem(id)}>+</Button>
-            <Button variant="danger" onClick={() => handleRemoveItem(id)}>-</Button>
+            <Button variant="success" onClick={() => handleAddItem(id)}>Add Quantity</Button>
+            <Button variant="danger" onClick={() => handleRemoveItem(id)}>Remove Product From Cart</Button>
           </div>
         </ListGroupItem>
       ))}

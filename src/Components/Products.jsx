@@ -1,6 +1,14 @@
 import { Component } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { ListGroup, Button, Container, Alert, Card } from 'react-bootstrap';
 import axios from 'axios';
+import { addItem } from '../redux/cartSlice';
+
+// const dispatch = useDispatch()
+
+const handleAddProductToCart = (id) => {
+    dispatch(addItem({id}))
+}
 
 class ProductList extends Component {
     constructor(props) {
@@ -61,7 +69,8 @@ class ProductList extends Component {
                                         Price: {product.price} <br/>
                                         Details: {product.product_details}
                                     </Card.Text>
-                                    <Button variant="danger" onClick={()=> this.deleteProduct(product.id)}>Remove Product</Button>
+                                    <Button className='m-2' variant="success" onClick={() => handleAddProductToCart(product.id)}>Add Product to Cart</Button>
+                                    <Button className='m-2' variant="danger" onClick={()=> this.deleteProduct(product.id)}>Remove Product From Catalog</Button>
                                 </Card.Body>
                                 </Card>
                         </ListGroup.Item>
