@@ -13,6 +13,7 @@ const ProductList = () => {
     
     const handleAddProductToCart = (id) => {
         dispatch(addItem({id}))
+        console.log("Product Added to Cart.");
     }
 
     const fetchProducts = () => {
@@ -30,8 +31,9 @@ const ProductList = () => {
     const deleteProduct = (productId) => {
         if (window.confirm("Are you sure?")) { 
             axios.delete(`http://127.0.0.1:5000/products/${productId}`)
-                 .then(() => {
-                     fetchProducts();
+            .then(() => {
+                fetchProducts();
+                console.log("Product Deleted from Cart.");
                  })
                  .catch(error => {
                      console.error('Error deleting product:', error);

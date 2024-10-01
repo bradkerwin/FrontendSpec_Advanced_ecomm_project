@@ -12,10 +12,12 @@ const Cart = () => {
 
     const handleAddItem = (id) => {
         dispatch(addItem({id}))
+        console.log("Product Quantity Increased by 1.");
     }
 
     const handleRemoveItem = (id) => {
         dispatch(removeItem({id}))
+        console.log("Product Quantity Decreased by 1.");
     }
 
     const handleCheckout = (id) => {
