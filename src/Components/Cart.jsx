@@ -70,7 +70,7 @@ const Cart = () => {
           </Button>
         </Link>
 
-        <Link to={"/"}>
+        <Link to={"/homepage"}>
           <Button className="m-2" variant="secondary">
             Back to Homepage
           </Button>
