@@ -16,10 +16,10 @@ function App() {
 
   return (
     <>
-    < NavigationBar/>
+    {user && <NavigationBar/>}
     <Routes>
-        <Route path='/signin' element={<SignIn />} />
-        <Route path='/' element={<HomePage /> } />
+        <Route path='/' element={<SignIn />} />
+        <Route path='/homepage' element={<HomePage /> } />
         <Route path='/customers' element={<CustomerList /> } />
         <Route path='/newcustomer' element={<NewCustomer /> } />
         <Route path='/products' element={<ProductList /> } />

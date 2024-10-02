@@ -1,23 +1,24 @@
-import { NavLink } from 'react-router-dom';
-import { Navbar, Nav } from 'react-bootstrap';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Navbar, Nav, Button } from 'react-bootstrap';
 
 function NavigationBar() {
+
+    const navigate = useNavigate();
+
+    const handleLogOut = () => {
+        sessionStorage.removeItem("user");
+        navigate("/");
+    }
+
     return (
         <Navbar bg="primary" expand="md">
-            <Navbar.Brand href="/customers">Welcome to E-Commerce</Navbar.Brand>
+            <Navbar.Brand href="/homepage">Welcome to E-Commerce</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"></Navbar.Toggle>
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link as= {NavLink} to="/" activeclassname="active">
-                    Home
-                    </Nav.Link>
+                <Nav className="m-auto">
                     
-                    <Nav.Link as= {NavLink} to="/newcustomer" activeclassname="active">
-                    Add New Customer
-                    </Nav.Link>
-
                     <Nav.Link as= {NavLink} to="/customers" activeclassname="active">
-                    View Existing Customers
+                    Customers
                     </Nav.Link>
 
                     <Nav.Link as= {NavLink} to="/newproduct" activeclassname="active">
@@ -25,22 +26,16 @@ function NavigationBar() {
                     </Nav.Link>
 
                     <Nav.Link as= {NavLink} to="/products" activeclassname="active">
-                    View Our Products
-                    </Nav.Link>
-
-                    <Nav.Link as= {NavLink} to="/neworder" activeclassname="active">
-                    Add New Order
-                    </Nav.Link>
-
-                    <Nav.Link as= {NavLink} to="/orders" activeclassname="active">
-                    Existing Orders
+                    Our Products
                     </Nav.Link>
 
                     <Nav.Link as= {NavLink} to="/cart" activeclassname="active">
-                    View Your Cart
+                    Your Cart
                     </Nav.Link>
-
                 </Nav>
+
+                <Button variant='mx-3' onClick={handleLogOut}>Log Out</Button>
+
             </Navbar.Collapse>
         </Navbar>
     )

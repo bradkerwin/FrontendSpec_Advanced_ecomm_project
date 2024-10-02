@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+    items: [],
+    loading: false,
+    error: null,
+};
+
 export const cartSlice = createSlice({
     name: 'shoppingCart',
     initialState: {
-        items: {},
-        totalItems: 0
+        items: JSON.parse(sessionStorage.getItem("shoppingCart")) || [],
+
     },
 
     reducers: {

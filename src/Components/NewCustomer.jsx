@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import axios from 'axios';
 import { Form, Button, Alert, Container, Modal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class NewCustomer extends Component {
 
@@ -113,13 +114,15 @@ class NewCustomer extends Component {
 
                 <Modal show={showSuccessModal} onHide={this.closeModal}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Success!</Modal.Title>
+                        <Modal.Title>Congrats!</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        The customer has been added!
+                        Your account was created!
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.closeModal}>Close</Button>
+                        <Link to="/">
+                            <Button variant="secondary" onClick={this.closeModal}>Sign in Now</Button>
+                        </Link>
                     </Modal.Footer>
                 </Modal>
                 
